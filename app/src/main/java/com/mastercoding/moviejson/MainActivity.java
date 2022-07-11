@@ -2,6 +2,7 @@ package com.mastercoding.moviejson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.AsyncListDiffer;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     private void PutDataIntoRecyclerview(List<MovieModelClass> movieList){
 
         Adaptery adaptery = new Adaptery(this,movieList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
         recyclerView.setAdapter(adaptery);
         recyclerView.setHasFixedSize(true);
