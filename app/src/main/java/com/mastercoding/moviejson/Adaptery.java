@@ -43,7 +43,7 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
     // Using the Glide Library
 
         Glide.with(mContext)
-                .load(mData.get(position).getImg())
+                .load("https://image.tmdb.org/t/p/w500/"+mData.get(position).getImg())
                 .into(holder.img);
 
     }
@@ -66,9 +66,6 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
             name = itemView.findViewById(R.id.name_text);
             img = itemView.findViewById(R.id.imageView);
 
-
         }
     }
-
-
-}
+  }

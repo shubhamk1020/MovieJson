@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,10 +27,12 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static String JSON_URL = "https://run.mocky.io/v3/8d86aa4d-1641-4e68-9a0d-6ac87bc442f5";
+    private static String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=79faaaa4592ef5d4279c97d15316ccb0";
 
     List<MovieModelClass> movieList;
     RecyclerView recyclerView;
+    ImageView header;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
         movieList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
+        header = findViewById(R.id.imageView2);
+
+        Glide.with(this)
+                .load(R.drawable.header)
+                .into(header);
 
         GetData getData = new GetData();
         getData.execute();
@@ -89,16 +99,16 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject  = new JSONObject(s);
 
-                JSONArray jsonArray = jsonObject.getJSONArray("moviz");
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
                 for(int i = 0; i<jsonArray.length();i++){
 
                     JSONObject jsonObject1  = jsonArray.getJSONObject(i);
 
                     MovieModelClass model = new MovieModelClass();
 
-                    model.setId(jsonObject1.getString("id"));
-                    model.setName(jsonObject1.getString("name"));
-                    model.setImg(jsonObject1.getString("image"));
+                    model.setId(jsonObject1.getString("vote_average"));
+                    model.setName(jsonObject1.getString("title"));
+                    model.setImg(jsonObject1.getString("poster_path"));
 
                     movieList.add(model);
                 }
